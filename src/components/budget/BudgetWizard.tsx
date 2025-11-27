@@ -15,6 +15,7 @@ interface BudgetWizardProps {
 }
 
 export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWizardProps) {
+  const TOTAL_QUESTIONS = 12;
   const [step, setStep] = useState(0);
   const [budget, setBudget] = useState<Partial<HouseholdBudget>>({
     monthly_income: 0,
@@ -146,7 +147,7 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
   const income = budget.monthly_income || 0;
 
   if (step === 0) {
-    return <Step0Income onComplete={handleStep0} />;
+    return <Step0Income onComplete={handleStep0} totalSteps={TOTAL_QUESTIONS} />;
   }
 
   if (step === 1) {
@@ -155,6 +156,7 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     return (
       <SliderStep
         stepNumber={2}
+        totalSteps={TOTAL_QUESTIONS}
         title="家賃 または 住宅ローンは、だいたい月いくらですか？"
         icon={Home}
         iconColor="bg-blue-600"
@@ -174,6 +176,7 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     return (
       <SliderStep
         stepNumber={3}
+        totalSteps={TOTAL_QUESTIONS}
         title="電気・ガス・水道などの光熱費は、だいたい月いくらですか？"
         icon={Zap}
         iconColor="bg-yellow-600"
@@ -192,7 +195,8 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     const defaultInternet = getDefaultValue(income, 'internet');
     return (
       <SliderStep
-        stepNumber={3}
+        stepNumber={4}
+        totalSteps={TOTAL_QUESTIONS}
         title="自宅のインターネット回線（Wi-Fi）は、だいたい月いくらですか？"
         icon={Wifi}
         iconColor="bg-cyan-600"
@@ -212,6 +216,8 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     return (
       <Step4Mobile
         initialValue={defaultMobile}
+        stepNumber={5}
+        totalSteps={TOTAL_QUESTIONS}
         onNext={handleStep4}
         onBack={() => setStep(3)}
       />
@@ -222,7 +228,8 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     const defaultCar = getDefaultValue(income, 'car');
     return (
       <SliderStep
-        stepNumber={5}
+        stepNumber={6}
+        totalSteps={TOTAL_QUESTIONS}
         title="車にかかるお金（ローン・駐車場・ガソリンなど）を合計すると、だいたい月いくらですか？"
         icon={Car}
         iconColor="bg-orange-600"
@@ -241,7 +248,8 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     const defaultInsurance = getDefaultValue(income, 'insurance');
     return (
       <SliderStep
-        stepNumber={6}
+        stepNumber={7}
+        totalSteps={TOTAL_QUESTIONS}
         title="生命保険・医療保険など、保険に月いくらくらい払っていますか？（合計でOK）"
         icon={Shield}
         iconColor="bg-green-600"
@@ -260,7 +268,8 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     const defaultKids = getDefaultValue(income, 'kids');
     return (
       <SliderStep
-        stepNumber={7}
+        stepNumber={8}
+        totalSteps={TOTAL_QUESTIONS}
         title="お子さん関連の毎月の固定費（保育園・学校・習い事など）は、だいたい月いくらくらいですか？"
         icon={Baby}
         iconColor="bg-pink-600"
@@ -279,7 +288,8 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     const defaultSavings = getDefaultValue(income, 'savings');
     return (
       <SliderStep
-        stepNumber={8}
+        stepNumber={9}
+        totalSteps={TOTAL_QUESTIONS}
         title="毎月の自動積立や投資（つみたてNISAなど）はありますか？"
         icon={TrendingUp}
         iconColor="bg-indigo-600"
@@ -298,7 +308,8 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     const defaultVariableExpenses = getDefaultValue(income, 'variable_expenses');
     return (
       <SliderStep
-        stepNumber={9}
+        stepNumber={10}
+        totalSteps={TOTAL_QUESTIONS}
         title="毎月の変動費（食事・交際費・娯楽・ゲーム課金など）は、だいたい月いくらですか？"
         icon={ShoppingCart}
         iconColor="bg-purple-600"
@@ -317,7 +328,8 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     const defaultDebtRepayment = getDefaultValue(income, 'debt_repayment');
     return (
       <SliderStep
-        stepNumber={10}
+        stepNumber={11}
+        totalSteps={TOTAL_QUESTIONS}
         title="毎月の返済額（奨学金・ローン・借入など）は、だいたい月いくらですか？"
         icon={CreditCard}
         iconColor="bg-red-600"
@@ -337,6 +349,8 @@ export function BudgetWizard({ onComplete, onSubscriptionsDetailed }: BudgetWiza
     return (
       <Step9Subscriptions
         initialValue={defaultSubscriptions}
+        stepNumber={12}
+        totalSteps={TOTAL_QUESTIONS}
         onRough={handleStep11Rough}
         onDetailed={handleStep11Detailed}
         onBack={() => setStep(10)}

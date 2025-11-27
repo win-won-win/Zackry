@@ -69,8 +69,8 @@ export function AmountSlider({
       <style>{`
         .slider-thumb::-webkit-slider-thumb {
           appearance: none;
-          width: 20px;
-          height: 20px;
+          width: var(--slider-thumb-size);
+          height: var(--slider-thumb-size);
           border-radius: 50%;
           background: #3b82f6;
           cursor: pointer;
@@ -80,12 +80,12 @@ export function AmountSlider({
 
         .slider-thumb::-webkit-slider-thumb:hover {
           background: #2563eb;
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
 
         .slider-thumb::-moz-range-thumb {
-          width: 20px;
-          height: 20px;
+          width: var(--slider-thumb-size);
+          height: var(--slider-thumb-size);
           border-radius: 50%;
           background: #3b82f6;
           cursor: pointer;
@@ -96,7 +96,7 @@ export function AmountSlider({
 
         .slider-thumb::-moz-range-thumb:hover {
           background: #2563eb;
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
       `}</style>
     </div>

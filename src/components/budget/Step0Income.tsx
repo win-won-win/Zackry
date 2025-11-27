@@ -5,9 +5,11 @@ import { CharacterWithBubble } from './CharacterWithBubble';
 interface Step0IncomeProps {
   onComplete: (income: number, memo?: string) => void;
   initialMemo?: string;
+  stepNumber?: number;
+  totalSteps?: number;
 }
 
-export function Step0Income({ onComplete, initialMemo = '' }: Step0IncomeProps) {
+export function Step0Income({ onComplete, initialMemo = '', stepNumber = 1, totalSteps = 12 }: Step0IncomeProps) {
   const [income, setIncome] = useState(250000);
   const [maxIncome, setMaxIncome] = useState(1000000);
   const [memo, setMemo] = useState(initialMemo);
@@ -45,7 +47,7 @@ export function Step0Income({ onComplete, initialMemo = '' }: Step0IncomeProps) 
               <TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
             </div>
             <div>
-              <div className="text-sm text-slate-500">質問 1 / 12</div>
+              <div className="text-sm text-slate-500">質問 {stepNumber} / {totalSteps}</div>
               <div className="text-xs text-slate-400">あと2分くらいで終わります</div>
             </div>
           </div>

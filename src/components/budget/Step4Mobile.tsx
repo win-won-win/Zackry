@@ -7,9 +7,11 @@ interface Step4MobileProps {
   initialValue: number;
   onNext: (carriers: string[], amount: number) => void;
   onBack?: () => void;
+  stepNumber?: number;
+  totalSteps?: number;
 }
 
-export function Step4Mobile({ initialValue, onNext, onBack }: Step4MobileProps) {
+export function Step4Mobile({ initialValue, onNext, onBack, stepNumber = 5, totalSteps = 12 }: Step4MobileProps) {
   const [step, setStep] = useState<'amount' | 'carrier-list' | 'carrier-detail'>('amount');
   const [selectedCarriers, setSelectedCarriers] = useState<string[]>([]);
   const [amount, setAmount] = useState(initialValue);
@@ -49,7 +51,7 @@ export function Step4Mobile({ initialValue, onNext, onBack }: Step4MobileProps) 
                 <Smartphone className="w-6 h-6 text-white" />
               </div>
               <div>
-                <div className="text-sm text-slate-500">質問 4 / 12</div>
+                <div className="text-sm text-slate-500">質問 {stepNumber} / {totalSteps}</div>
                 <div className="text-xs text-slate-400">あと1分くらいで終わります</div>
               </div>
             </div>
@@ -106,7 +108,7 @@ export function Step4Mobile({ initialValue, onNext, onBack }: Step4MobileProps) 
               <Smartphone className="w-6 h-6 text-white" />
             </div>
             <div>
-              <div className="text-sm text-slate-500">質問 4 / 12</div>
+              <div className="text-sm text-slate-500">質問 {stepNumber} / {totalSteps}</div>
               <div className="text-xs text-slate-400">あと1分くらいで終わります</div>
             </div>
           </div>

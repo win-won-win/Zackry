@@ -7,9 +7,11 @@ interface Step9SubscriptionsProps {
   onRough: (amount: number) => void;
   onDetailed: () => void;
   onBack?: () => void;
+  stepNumber?: number;
+  totalSteps?: number;
 }
 
-export function Step9Subscriptions({ initialValue, onRough, onDetailed, onBack }: Step9SubscriptionsProps) {
+export function Step9Subscriptions({ initialValue, onRough, onDetailed, onBack, stepNumber = 12, totalSteps = 12 }: Step9SubscriptionsProps) {
   const [mode, setMode] = useState<'select' | 'rough'>('select');
   const [amount, setAmount] = useState(initialValue);
 
@@ -31,7 +33,7 @@ export function Step9Subscriptions({ initialValue, onRough, onDetailed, onBack }
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
               <div>
-                <div className="text-sm text-slate-500">質問 9 / 12</div>
+                <div className="text-sm text-slate-500">質問 {stepNumber} / {totalSteps}</div>
                 <div className="text-xs text-slate-400">もうすぐ終わります！</div>
               </div>
             </div>
@@ -91,15 +93,15 @@ export function Step9Subscriptions({ initialValue, onRough, onDetailed, onBack }
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
       <div className="max-w-3xl w-full">
         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-          <div className="mb-8 flex items-center gap-3">
-            <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <div className="text-sm text-slate-500">質問 9 / 10</div>
+            <div className="mb-8 flex items-center gap-3">
+              <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <div>
+              <div className="text-sm text-slate-500">質問 {stepNumber} / {totalSteps}</div>
               <div className="text-xs text-slate-400">もうすぐ終わります！</div>
+              </div>
             </div>
-          </div>
 
           <CharacterWithBubble message="サブスクに月いくらくらい使っていますか？" />
 
