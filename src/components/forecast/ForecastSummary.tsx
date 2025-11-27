@@ -365,6 +365,10 @@ export function ForecastSummary({
     setEditingBalance(null);
   };
 
+  const handleBalanceValueChange = (value: number) => {
+    setEditingBalance((prev) => (prev ? { ...prev, value } : prev));
+  };
+
   const getCategoryColor = (categoryId: string, type: 'income' | 'expense') => {
     const categories = type === 'income' ? INCOME_CATEGORIES : EXPENSE_CATEGORIES;
     const category = categories.find((c) => c.id === categoryId);
@@ -595,7 +599,7 @@ export function ForecastSummary({
                                   </div>
                                   <AmountSlider
                                     value={editingBalance.value}
-                                    onChange={(value) => setEditingBalance({ ...editingBalance, value })}
+                                    onChange={handleBalanceValueChange}
                                     min={0}
                                     max={10000000}
                                     step={10000}
@@ -723,10 +727,15 @@ export function ForecastSummary({
           onAddEvent={handleAddEvent}
           onDeleteEvent={handleDeleteEvent}
           onEditIncome={handleEditIncome}
+          onEditBalance={handleEditBalance}
           editingIncome={editingIncome}
+          editingBalance={editingBalance}
           onSaveIncome={handleSaveIncome}
+          onSaveBalance={handleSaveBalance}
           onCancelEditIncome={handleCancelEditIncome}
+          onCancelEditBalance={handleCancelEditBalance}
           onIncomeValueChange={(value) => setEditingIncome(editingIncome ? { ...editingIncome, value } : null)}
+          onBalanceValueChange={handleBalanceValueChange}
           isPastMonth={isPastMonth(selectedMonth.year, selectedMonth.month)}
         />
       )}

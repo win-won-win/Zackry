@@ -1,4 +1,4 @@
-import { CheckCircle2, Sparkles } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { Logo } from './Logo';
 
@@ -24,15 +24,12 @@ export function WelcomeScreen({ onStart, onGmailConnect }: WelcomeScreenProps) {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
         <div className="max-w-2xl w-full text-center">
           <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 lg:p-12">
-            <div className="mb-6">
-              <Sparkles className="w-12 h-12 md:w-16 md:h-16 mx-auto text-blue-600" />
-            </div>
             <h1 className="mb-6">
               <Logo
                 align="center"
                 className="w-full"
-                imageClassName="h-12 md:h-14 lg:h-16"
-                textClassName="text-3xl md:text-4xl lg:text-5xl"
+                imageClassName="h-16 md:h-20 lg:h-24"
+                textClassName="text-4xl md:text-5xl lg:text-6xl"
               />
             </h1>
             <p className="text-xl md:text-2xl text-slate-700 mb-8 font-semibold">
@@ -53,17 +50,14 @@ export function WelcomeScreen({ onStart, onGmailConnect }: WelcomeScreenProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-      <div className="max-w-2xl w-full text-center">
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 lg:p-12">
-          <div className="mb-6">
-            <Sparkles className="w-12 h-12 md:w-16 md:h-16 mx-auto text-blue-600" />
-          </div>
+        <div className="max-w-2xl w-full text-center">
+          <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8 lg:p-12">
           <h1 className="mb-6">
             <Logo
               align="center"
               className="w-full"
-              imageClassName="h-12 md:h-14 lg:h-16"
-              textClassName="text-3xl md:text-4xl lg:text-5xl"
+              imageClassName="h-16 md:h-20 lg:h-24"
+              textClassName="text-4xl md:text-5xl lg:text-6xl"
             />
           </h1>
           <p className="text-xl md:text-2xl text-slate-700 mb-8 font-semibold">

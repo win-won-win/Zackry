@@ -175,3 +175,13 @@ export type MonthlyIncomeOverride = {
   created_at: string;
   updated_at: string;
 };
+
+export type MonthlyBalanceOverride = {
+  id: string;
+  user_id: string;
+  year: number;
+  month: number;
+  balance: number;
+  created_at: string;
+  updated_at: string;
+};

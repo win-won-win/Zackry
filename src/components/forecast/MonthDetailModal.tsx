@@ -30,10 +30,15 @@ interface MonthDetailModalProps {
   onAddEvent: (event: Omit<FutureEvent, 'id'>) => void;
   onDeleteEvent: (eventId: string) => void;
   onEditIncome: (year: number, month: number) => void;
+  onEditBalance: (year: number, month: number, balance: number) => void;
   editingIncome?: { year: number; month: number; value: number } | null;
+  editingBalance?: { year: number; month: number; value: number } | null;
   onSaveIncome?: () => void;
+  onSaveBalance?: () => void;
   onCancelEditIncome?: () => void;
+  onCancelEditBalance?: () => void;
   onIncomeValueChange?: (value: number) => void;
+  onBalanceValueChange?: (value: number) => void;
   isPastMonth?: boolean;
 }
 
@@ -57,10 +62,15 @@ export function MonthDetailModal({
   onAddEvent,
   onDeleteEvent,
   onEditIncome,
+  onEditBalance,
   editingIncome,
+  editingBalance,
   onSaveIncome,
+  onSaveBalance,
   onCancelEditIncome,
+  onCancelEditBalance,
   onIncomeValueChange,
+  onBalanceValueChange,
   isPastMonth = false,
 }: MonthDetailModalProps) {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -127,13 +137,55 @@ export function MonthDetailModal({
               <p className="text-xs mt-1">この月のデータは記録として保存されています。ざっくり月額管理の変更は反映されません。手動で編集することは可能です。</p>
             </div>
           )}
-          <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-4">
-            <div className="flex items-center justify-between mb-4">
-              <div className="text-sm text-slate-600">月末残高</div>
-              <div className={`text-2xl font-bold ${monthData.balance >= 0 ? 'text-slate-900' : 'text-red-600'}`}>
-                ¥{monthData.balance.toLocaleString()}
+          <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="text-sm text-slate-600">月末残高</div>
+                <p className="text-xs text-slate-500">ここで入力した値が優先されます</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className={`text-2xl font-bold ${monthData.balance >= 0 ? 'text-slate-900' : 'text-red-600'}`}>
+                  ¥{monthData.balance.toLocaleString()}
+                </div>
+                <button
+                  onClick={() => onEditBalance(monthData.year, monthData.month, monthData.balance)}
+                  className="p-2 text-blue-600 hover:bg-blue-100 rounded transition-colors"
+                >
+                  <Edit3 className="w-4 h-4" />
+                </button>
               </div>
             </div>
+
+            {editingBalance?.year === monthData.year && editingBalance?.month === monthData.month && (
+              <div className="bg-white border-2 border-blue-300 rounded-lg p-3 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-slate-700">月末残高を編集</span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={onSaveBalance}
+                      className="p-1.5 text-green-600 hover:bg-green-100 rounded transition-colors"
+                    >
+                      <Save className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={onCancelEditBalance}
+                      className="p-1.5 text-red-600 hover:bg-red-100 rounded transition-colors"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+                <AmountSlider
+                  value={editingBalance.value}
+                  onChange={(value) => onBalanceValueChange?.(value)}
+                  min={0}
+                  max={20000000}
+                  step={10000}
+                  showValue={true}
+                />
+              </div>
+            )}
+
             <div className={`text-center text-sm font-medium px-3 py-2 rounded-lg ${
               monthData.net >= 0 ? 'text-green-700 bg-green-100' : 'text-red-700 bg-red-100'
             }`}>

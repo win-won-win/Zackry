@@ -35,6 +35,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       provider: 'google',
       options: {
         scopes: 'openid email profile https://www.googleapis.com/auth/gmail.readonly',
+        redirectTo: typeof window !== 'undefined' ? window.location.origin : undefined,
       },
     });
     if (error) throw error;

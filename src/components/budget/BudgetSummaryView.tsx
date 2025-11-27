@@ -94,6 +94,18 @@ export function BudgetSummaryView({ budget, onEdit, onEditSubscriptions, onReset
   const [isIncomeExpanded, setIsIncomeExpanded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [initializedExpansion, setInitializedExpansion] = useState(false);
+  const displayName =
+    (user?.user_metadata?.full_name as string) ||
+    (user?.user_metadata?.name as string) ||
+    user?.email ||
+    '';
+  const avatarUrl =
+    (user?.user_metadata?.avatar_url as string) ||
+    (user?.user_metadata?.picture as string) ||
+    '';
+  const userInitial = displayName.trim()
+    ? Array.from(displayName.trim())[0]?.toUpperCase()
+    : '？';
 
   useEffect(() => {
     const checkMobile = () => {
@@ -413,10 +425,20 @@ export function BudgetSummaryView({ budget, onEdit, onEditSubscriptions, onReset
             </div>
             <button
               onClick={onOpenSettings}
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-md"
-              title="アカウント設定"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-md overflow-hidden"
+              title={displayName || 'アカウント設定'}
             >
-              <User className="w-5 h-5" />
+              {avatarUrl ? (
+                <img
+                  src={avatarUrl}
+                  alt="ユーザーアイコン"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <span className="w-full h-full flex items-center justify-center text-lg font-bold">
+                  {userInitial}
+                </span>
+              )}
             </button>
           </div>
 
